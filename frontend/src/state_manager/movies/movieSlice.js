@@ -7,6 +7,12 @@ const initialState = {
   allMovies: [],
   loading: false,
   error: null,
+  categories: [
+    "Series",
+    "New & Popular",
+    "My List",
+    "Browse by Languages",
+  ]
 };
 
 export const getRandomMovie = createAsyncThunk(
