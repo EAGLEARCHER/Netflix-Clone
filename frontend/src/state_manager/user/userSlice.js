@@ -57,6 +57,7 @@ const userSlice = createSlice({
       removeUserFromLocalStorage();
       if (payload) {
         toast.success(payload);
+        toast.success("You can leave the page now....")
       }
     },
   },

@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
 import NotificationModal from "./NotificationModal";
+import { useSelector } from "react-redux";
 
 const TOP_OFFSET = 66;
 export default function Navbar() {
@@ -15,7 +16,7 @@ export default function Navbar() {
   const [showBackground, setShowBackground] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showNotificationPanel, setNotificationPanel] = useState(false);
-
+  const categories = useSelector((store) => store.movie.categories);
   const imageUrl = localStorage.getItem("image");
   const toggleMenu = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -50,11 +51,11 @@ export default function Navbar() {
       >
         <img className="h-4 lg:h-7" src={logo} alt="logo" />
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
-          <NavbarItems label="Home" />
-          <NavbarItems label="Series" />
-          <NavbarItems label="New & Popular" />
-          <NavbarItems label="My List" />
-          <NavbarItems label="Browse by Languages" />
+          {categories.map((category) => {
+            return (
+              <NavbarItems label={category}/>
+            );
+          })}
         </div>
         <div
           onClick={toggleMenu}
