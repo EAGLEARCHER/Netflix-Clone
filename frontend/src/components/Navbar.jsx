@@ -3,15 +3,18 @@ import logo from "../assets/logo.png";
 import profileLogo from "../assets/default-blue.png";
 import NavbarItems from "./NavbarItems";
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
-
+import SearchBar from "./SearchBar";
 import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
+import NotificationModal from "./NotificationModal";
 
 const TOP_OFFSET = 66;
 export default function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const [showNotificationPanel, setNotificationPanel] = useState(false);
 
   const imageUrl = localStorage.getItem("image");
   const toggleMenu = () => {
@@ -32,6 +35,12 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const handleBar = () => {
+    setShowSearchBar(true);
+  };
+  const handleNotificationPanel = () => {
+    setNotificationPanel(!showNotificationPanel);
+  };
   return (
     <nav className="w-full fixed z-40">
       <div
@@ -61,10 +70,17 @@ export default function Navbar() {
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsSearch />
+            {showSearchBar ? (
+              <SearchBar changeBar={setShowSearchBar} />
+            ) : (
+              <BsSearch onClick={handleBar} />
+            )}
           </div>
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsBell />
+          <div
+            onClick={handleNotificationPanel}
+            className="text-gray-200 hover:text-gray-300 cursor-pointer transition"
+          >
+            <NotificationModal />
           </div>
           <div
             onClick={toggleAccountMenu}

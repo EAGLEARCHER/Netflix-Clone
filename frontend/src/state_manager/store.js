@@ -9,12 +9,20 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   user: userSlice,
   movie: movieSlice,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const rootReducer = (state, action)=>{
+//   if(action.type === "LOGOUT" || action.type == "SIGNOUT"){
+//     storage.removeItem('persist:root');
+//     return appReducer(undefined, action);
+//   }
+//   return appReducer(state,action);
+// }
+
+const persistedReducer = persistReducer(persistConfig, appReducer);
 
 const store = configureStore({
   reducer: persistedReducer,

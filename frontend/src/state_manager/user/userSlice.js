@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import customAxios from "../../../utils/axios";
 import { removeUserFromLocalStorage } from "../../utils/localstorage";
-
+import { clearStoreThunk } from "./userThunk";
 const initialState = {
   isValidUser: false,
   isLoading: false,
@@ -45,22 +45,15 @@ export const getGithubAccessToken = createAsyncThunk(
 
 export const clearStore = createAsyncThunk(
   "user/clearStore",
-  async (message, thunkAPI) => {
-    try {
-      thunkAPI.dispatch(logoutUser(message));
-      return Promise.resolve();
-    } catch (error) {
-      return Promise.reject();
-    }
-  }
+  clearStoreThunk
 );
-
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     logoutUser: (state, { payload }) => {
       state.isValidUser = false;
+      console.log("Logged out");
       removeUserFromLocalStorage();
       if (payload) {
         toast.success(payload);
@@ -125,4 +118,5 @@ const userSlice = createSlice({
       });
   },
 });
+export const { logoutUser } = userSlice.actions;
 export default userSlice.reducer;

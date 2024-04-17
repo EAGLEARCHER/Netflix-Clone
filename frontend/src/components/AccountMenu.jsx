@@ -1,17 +1,18 @@
 import React from "react";
 import profileLogo from "../assets/default-blue.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearStore } from "../state_manager/user/userSlice";
 
 export default function AccountMenu({ visible }) {
-  const imageUrl = localStorage.getItem("image");
-  const username = localStorage.getItem("username");
+  const imageUrl = useSelector((store) => store.user.image);
+  const username = useSelector((store) => store.user.username);
   if (!visible) {
     return null;
   }
   const dispatch = useDispatch();
   const handleSignOut = () => {
-    dispatch(clearStore("LoggedOuts"));
+    console.log("hehehe")
+    dispatch(clearStore("LoggedOut"));
   };
   return (
     <div className="bg-black w-56 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800 flex">
@@ -28,9 +29,7 @@ export default function AccountMenu({ visible }) {
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div
-          onClick={() => {
-            handleSignOut;
-          }}
+          onClick={handleSignOut}
           className="px-3 text-center text-white text-sm hover:underline"
         >
           Sign out of Netflix

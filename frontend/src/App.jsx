@@ -6,6 +6,7 @@ import Auth from "./pages/Auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Watch } from "./pages/Watch";
+import TestComponent from "./components/TestComponet";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,7 @@ function App() {
     <div className="h-full w-full">
       <RouterProvider router={router} />
       <ToastContainer autoClose={5000} position="bottom-right" />
+      {/* <TestComponent /> */}
     </div>
   );
 }
