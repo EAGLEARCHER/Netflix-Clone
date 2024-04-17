@@ -3,10 +3,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import customAxios from "../../../utils/axios";
 import { removeUserFromLocalStorage } from "../../utils/localstorage";
-
+import { clearStoreThunk } from "./userThunk";
 const initialState = {
   isValidUser: false,
   isLoading: false,
+  username: "",
+  access_token: "",
+  image: "",
 };
 
 export const registerUser = createAsyncThunk(
@@ -42,22 +45,15 @@ export const getGithubAccessToken = createAsyncThunk(
 
 export const clearStore = createAsyncThunk(
   "user/clearStore",
-  async (message, thunkAPI) => {
-    try {
-      thunkAPI.dispatch(logoutUser(message));
-      return Promise.resolve();
-    } catch (error) {
-      return Promise.reject();
-    }
-  }
+  clearStoreThunk
 );
-
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     logoutUser: (state, { payload }) => {
       state.isValidUser = false;
+      console.log("Logged out");
       removeUserFromLocalStorage();
       if (payload) {
         toast.success(payload);
@@ -104,10 +100,13 @@ const userSlice = createSlice({
       .addCase(getGithubAccessToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isValidUser = true;
-        localStorage.setItem("access_token", action.payload.data.access_token);
         console.warn(action.payload.data);
-        localStorage.setItem("username", action.payload.data.userData.login);
-        localStorage.setItem("image", action.payload.data.userData.avatar_url);
+        localStorage.setItem("access_token", action.payload.data.access_token);
+        localStorage.setItem("username", action.payload.data.userData.name);
+        localStorage.setItem("image", action.payload.data.userData.image);
+        state.access_token = action.payload.data.access_token;
+        state.username = action.payload.data.userData.name;
+        state.image = action.payload.data.userData.image;
         toast.success("Logged in successfully!");
       })
       .addCase(getGithubAccessToken.rejected, (state, action) => {
@@ -119,4 +118,5 @@ const userSlice = createSlice({
       });
   },
 });
+export const { logoutUser } = userSlice.actions;
 export default userSlice.reducer;
