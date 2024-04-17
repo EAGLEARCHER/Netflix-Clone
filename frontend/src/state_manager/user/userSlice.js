@@ -10,6 +10,8 @@ const initialState = {
   username: "",
   access_token: "",
   image: "",
+  userId: "",
+  favorites: [],
 };
 
 export const registerUser = createAsyncThunk(
@@ -43,9 +45,18 @@ export const getGithubAccessToken = createAsyncThunk(
   }
 );
 
-export const clearStore = createAsyncThunk(
-  "user/clearStore",
-  clearStoreThunk
+export const clearStore = createAsyncThunk("user/clearStore", clearStoreThunk);
+
+export const addFav = createAsyncThunk(
+  "user/favMovie",
+  async (ids, thunkAPI) => {
+    console.log(ids);
+    const response = await customAxios.patch(
+      "http://localhost:5000/user/addfav/",
+      ids
+    );
+    return response;
+  }
 );
 const userSlice = createSlice({
   name: "user",
@@ -53,11 +64,10 @@ const userSlice = createSlice({
   reducers: {
     logoutUser: (state, { payload }) => {
       state.isValidUser = false;
-      console.log("Logged out");
       removeUserFromLocalStorage();
       if (payload) {
         toast.success(payload);
-        toast.success("You can leave the page now....")
+        toast.success("You can leave the page now....");
       }
     },
   },
@@ -101,13 +111,15 @@ const userSlice = createSlice({
       .addCase(getGithubAccessToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isValidUser = true;
-        console.warn(action.payload.data);
+        console.log(action.payload);
+        localStorage.setItem("userId", action.payload.data.userData._id);
         localStorage.setItem("access_token", action.payload.data.access_token);
         localStorage.setItem("username", action.payload.data.userData.name);
         localStorage.setItem("image", action.payload.data.userData.image);
         state.access_token = action.payload.data.access_token;
         state.username = action.payload.data.userData.name;
         state.image = action.payload.data.userData.image;
+        state.userId = action.payload.data.userData._id;
         toast.success("Logged in successfully!");
       })
       .addCase(getGithubAccessToken.rejected, (state, action) => {
@@ -115,6 +127,22 @@ const userSlice = createSlice({
 
         toast.error("login failed", action.error.message);
         // Log the error to the console
+        console.error("Login failed", action.error);
+      })
+      .addCase(addFav.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(addFav.fulfilled, (state, action) => {
+        state.isLoading = false;
+        // console.log(action.payload.data.);
+        state.favorites = action.payload.data.favoriteIds;
+        toast.success("Added to Favorite...")
+      })
+      .addCase(addFav.rejected, (state, action) => {
+        state.isLoading = false;
+
+        toast.error("failed to add fav", action.error.message);
+
         console.error("Login failed", action.error);
       });
   },

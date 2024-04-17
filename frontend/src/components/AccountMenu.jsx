@@ -11,7 +11,6 @@ export default function AccountMenu({ visible }) {
   }
   const dispatch = useDispatch();
   const handleSignOut = () => {
-    console.log("hehehe")
     dispatch(clearStore("LoggedOut"));
   };
   return (

@@ -4,9 +4,10 @@ import { PlayButton } from "./PlayButton";
 import { FavButton } from "./FavButton";
 
 export const InfoModal = ({ visible, onClose, data }) => {
+  console.log("datadatadatadatadatadatadatadatadatadata", data);
   const [isVisible, setIsVisible] = useState(visible);
   useEffect(() => {
-    setIsVisible(!!visible);
+    setIsVisible(visible);
   }, [visible]);
 
   const handleClose = useCallback(() => {
@@ -31,8 +32,8 @@ export const InfoModal = ({ visible, onClose, data }) => {
           <div className="relative h-96">
             <video
               className="w-full brightness-[60%] object-cover h-full"
-              autoPlay
-              muted
+              // autoPlay
+              // muted
               loop
               poster={data?.thumbnailUrl}
               src={data?.videoUrl}
@@ -41,7 +42,11 @@ export const InfoModal = ({ visible, onClose, data }) => {
               onClick={() => {}}
               className="sursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
             >
-              <AiOutlineClose className="text-white" size={20} onClick={handleClose}/>
+              <AiOutlineClose
+                className="text-white"
+                size={20}
+                onClick={handleClose}
+              />
             </div>
             <div className="absolute bottom-[10%] left-10">
               <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8">
@@ -49,7 +54,7 @@ export const InfoModal = ({ visible, onClose, data }) => {
               </p>
               <div className="flex flex-row gap-4">
                 <PlayButton movie={data} />
-                <FavButton movieId={data?.id} />
+                <FavButton movieId={data?._id} />
               </div>
             </div>
           </div>

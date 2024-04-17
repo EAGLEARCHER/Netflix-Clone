@@ -48,7 +48,7 @@ export const Watch = () => {
 
       {/* Video Player */}
       <video
-        autoPlay
+        // autoPlay
         controls
         className={`h-full w-full`}
         src={movie?.videoUrl}

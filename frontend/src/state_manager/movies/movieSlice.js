@@ -3,7 +3,6 @@ import customAxios from "../../../utils/axios";
 
 const initialState = {
   currentMovie: {},
-  favs: [],
   allMovies: [],
   loading: false,
   error: null,

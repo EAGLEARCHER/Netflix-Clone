@@ -15,7 +15,6 @@ export const clearStoreThunk = async (message, thunkAPI) => {
   try {
     // Dispatch the `logoutUser` action using thunkAPI.dispatch
     thunkAPI.dispatch(logoutUser(message));
-    console.log("Logged out and store cleared.");
     return Promise.resolve();
   } catch (error) {
     console.error("Error clearing the store:", error);
