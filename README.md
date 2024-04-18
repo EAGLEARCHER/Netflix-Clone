@@ -60,6 +60,9 @@ Example `.env` file:
 PORT=your-port-number
 MONGODB_URI=your-mongodb-connection-uri
 JWT_SECRET=your-jwt-secret
+CLIENT_ID=your-github-client-id
+CLIENT_SECRET=your-github-app-secrete
+JWT_LIFETIME=your-jwr-life-duration
 ```
 
 ### 6. Run the Project Locally
@@ -69,7 +72,7 @@ JWT_SECRET=your-jwt-secret
 In the `backend` directory, start the Node.js/Express.js server:
 
 ```bash
-cd server
+cd backend
 npm run dev
 ```
 
@@ -78,11 +81,11 @@ npm run dev
 In a separate terminal window, navigate to the `frontend` directory and start the React.js client:
 
 ```bash
-cd client
+cd frontend
 npm run dev
 ```
 
-The project should now be running locally. You can access it by opening your web browser and visiting `http://localhost:3000`.
+The project should now be running locally. You can access it by opening your web browser and visiting `http://localhost:5173`.
 
 ## Contributing
 
