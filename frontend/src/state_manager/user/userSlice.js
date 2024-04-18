@@ -57,6 +57,23 @@ export const addFav = createAsyncThunk(
     return response;
   }
 );
+export const removeFav = createAsyncThunk(
+  "user/removeFavorite",
+  async (ids, thunkAPI) => {
+    try {
+      console.log(ids);
+      const response = await customAxios.delete(
+        "http://localhost:5000/user/removefav/",
+        { data: ids }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error removing favorite:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -134,7 +151,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         // console.log(action.payload.data.);
         state.favorites = action.payload.data.favoriteIds;
-        toast.success("Added to Favorite...")
+        toast.success("Added to Favorite...");
       })
       .addCase(addFav.rejected, (state, action) => {
         state.isLoading = false;

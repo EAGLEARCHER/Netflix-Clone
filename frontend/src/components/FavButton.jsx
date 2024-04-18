@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
-import { addFav } from "../state_manager/user/userSlice";
+import { addFav, removeFav } from "../state_manager/user/userSlice";
 
 const FavoriteButton = ({ movieId }) => {
   const favorites = useSelector((state) => state.user.favorites);
-  console.log(favorites);
   const [isFavorite, setIsFavorite] = useState(favorites.includes(movieId));
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);
 
   const handleToggleFavorites = () => {
-    dispatch(addFav({ userId, movieId }));
+    if (isFavorite) {
+      dispatch(removeFav({ userId, movieId }));
+    } else {
+      dispatch(addFav({ userId, movieId }));
+    }
     setIsFavorite(!isFavorite);
   };
 
