@@ -5,6 +5,7 @@ import { addFav } from "../state_manager/user/userSlice";
 
 const FavoriteButton = ({ movieId }) => {
   const favorites = useSelector((state) => state.user.favorites);
+  console.log(favorites);
   const [isFavorite, setIsFavorite] = useState(favorites.includes(movieId));
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);

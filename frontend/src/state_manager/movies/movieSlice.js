@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   error: null,
   categories: [
+    "Home",
     "Series",
     "New & Popular",
     "My List",

@@ -50,7 +50,6 @@ export const clearStore = createAsyncThunk("user/clearStore", clearStoreThunk);
 export const addFav = createAsyncThunk(
   "user/favMovie",
   async (ids, thunkAPI) => {
-    console.log(ids);
     const response = await customAxios.patch(
       "http://localhost:5000/user/addfav/",
       ids
@@ -111,7 +110,6 @@ const userSlice = createSlice({
       .addCase(getGithubAccessToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isValidUser = true;
-        console.log(action.payload);
         localStorage.setItem("userId", action.payload.data.userData._id);
         localStorage.setItem("access_token", action.payload.data.access_token);
         localStorage.setItem("username", action.payload.data.userData.name);

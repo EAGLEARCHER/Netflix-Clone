@@ -2,7 +2,6 @@ import React from "react";
 
 export default function NavbarItems({ label }) {
   const goToCategory = (category) => {
-    console.log(`Going to ${category}`);
     if (category === "Home") {
       window.scroll({
         top: 0,

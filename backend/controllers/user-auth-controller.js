@@ -82,9 +82,6 @@ const githubAccessToken = async (req, res) => {
     };
     user = await User.create(userDataToSave);
   }
-  console.log(fullUserData);
-  console.log(user);
-
   res.status(StatusCodes.OK).json({ userData: user, access_token });
 };
 

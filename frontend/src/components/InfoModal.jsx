@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { PlayButton } from "./PlayButton";
-import { FavButton } from "./FavButton";
+import FavoriteButton from "./FavButton"
 
 export const InfoModal = ({ visible, onClose, data }) => {
-  console.log("datadatadatadatadatadatadatadatadatadata", data);
   const [isVisible, setIsVisible] = useState(visible);
   useEffect(() => {
     setIsVisible(visible);
@@ -54,7 +53,7 @@ export const InfoModal = ({ visible, onClose, data }) => {
               </p>
               <div className="flex flex-row gap-4">
                 <PlayButton movie={data} />
-                <FavButton movieId={data?._id} />
+                <FavoriteButton movieId={data?._id} />
               </div>
             </div>
           </div>
