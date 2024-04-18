@@ -1,5 +1,5 @@
 import React from "react";
-import { FavButton } from "./FavButton";
+import FavoriteButton from "./FavButton";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ export const MovieCard = ({ movie }) => {
   const handleWatch = () => {
     navigate("/watch", {
       state: {
-        movieId: movie.id,
+        movieId: movie._id,
         title: movie.title,
         videoUrl: movie.videoUrl,
       },
@@ -51,7 +51,7 @@ export const MovieCard = ({ movie }) => {
             >
               <BsFillPlayCircleFill className="text-black w-4 lg:w-6" />
             </div>
-            <FavButton movieId={movie.id} />
+            <FavoriteButton movieId={movie._id} />
             <div className="cursor-pointer ml-auto group/item w-6 h-6 lg:w-10 lg:h-10 border-white border-2 rounded-full flex justify-center items-center transition hover:border-neutral-300">
               <BsChevronDown
                 className="text-white group-hover/item:text-neutral-300 w-4 lg:w-6 "

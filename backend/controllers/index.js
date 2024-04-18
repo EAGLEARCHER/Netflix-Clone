@@ -5,7 +5,7 @@ const {
 } = require("./user-auth-controller");
 const { getAllUsers, getUser } = require("./fetch-user-controller");
 const { deleteOneUser, deleteAllUsers } = require("./delete-user-controller");
-const { addFavMovie } = require("./update-user-controller");
+const { addFavMovie, removeFavMovie } = require("./update-user-controller");
 module.exports = {
   register,
   getAllUsers,
@@ -15,4 +15,5 @@ module.exports = {
   login,
   githubAccessToken,
   addFavMovie,
+  removeFavMovie,
 };

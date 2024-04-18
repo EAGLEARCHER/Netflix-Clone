@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 export default function Dashboard() {
   const isValidUser = localStorage.getItem("access_token");
   const categories = useSelector((store) => store.movie.categories);
-  console.log(categories);
   const navigate = useNavigate();
   useEffect(() => {
     if (!isValidUser) {

@@ -9,6 +9,7 @@ const {
   login,
   githubAccessToken,
   addFavMovie,
+  removeFavMovie
 } = require("../controllers");
 
 // Route to register/login a user
@@ -18,6 +19,7 @@ router.post("/auth/login", login);
 
 // Routes for user operations
 router.patch("/addfav", addFavMovie);
+router.delete("/removefav", removeFavMovie);
 router.get("/", getAllUsers);
 router.delete("/", deleteAllUsers);
 router.get("/:id", getUser);
