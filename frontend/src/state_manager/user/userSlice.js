@@ -159,6 +159,22 @@ const userSlice = createSlice({
         toast.error("failed to add fav", action.error.message);
 
         console.error("Login failed", action.error);
+      })
+      .addCase(removeFav.pending, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(removeFav.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log(action.payload);
+        state.favorites = action.payload;
+        toast.info("Removed from favorite list.");
+      })
+      .addCase(removeFav.rejected, (state, action) => {
+        state.isLoading = false;
+
+        toast.error("failed to add fav", action.error.message);
+
+        console.error("Login failed", action.error);
       });
   },
 });

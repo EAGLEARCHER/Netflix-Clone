@@ -9,7 +9,9 @@ const deleteOneUser = async (req, res) => {
 
 const deleteAllUsers = async (req, res) => {
   const deletedUser = await User.deleteMany();
-  res.status(StatusCodes.ACCEPTED).json({msg: "Deleting all users"});
+  res
+    .status(StatusCodes.ACCEPTED)
+    .json({ msg: "Deleting all users", deletedUser });
 };
 
 module.exports = {
