@@ -91,6 +91,4 @@ The project should now be running locally. You can access it by opening your web
 
 Contributions are welcome! If you have any suggestions, improvements, or feature requests, feel free to open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+HAPPY CODING!!
