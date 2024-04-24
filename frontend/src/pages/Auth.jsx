@@ -12,7 +12,7 @@ import {
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
-const CLIENT_ID = "fd47e71dea4f9e7ee15a";
+const CLIENT_ID = "YOUR-CLIENT-ID";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
