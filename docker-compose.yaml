@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_URL=mongodb://database:27017/learning_db
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - database
+
+  database:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - app:/data/db
+
+volumes:
+  app:
