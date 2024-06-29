@@ -31,8 +31,8 @@ export const InfoModal = ({ visible, onClose, data }) => {
           <div className="relative h-96">
             <video
               className="w-full brightness-[60%] object-cover h-full"
-              // autoPlay
-              // muted
+              autoPlay
+              muted
               loop
               poster={data?.thumbnailUrl}
               src={data?.videoUrl}
